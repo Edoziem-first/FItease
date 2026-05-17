@@ -3,777 +3,972 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FitEase — Fashion for Every Age</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>FitEase — Redesigned</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --cream:    #F7F3ED;
-  --cream-dk: #EDE8E0;
-  --bark:     #2B2118;
-  --bark-mid: #4A3728;
-  --terracotta: #C0492B;
-  --terra-lt:   #FADBD1;
-  --terra-dk:   #8B2D17;
-  --sage:     #4A7C63;
-  --sage-lt:  #D4EAE0;
-  --amber:    #D4860A;
-  --amber-lt: #FAF0D7;
-  --mist:     #9B9490;
-  --border:   #DDD8D0;
-  --white:    #FFFFFF;
-  --shadow:   0 2px 24px rgba(43,33,24,.08);
-  --shadow-lg:0 8px 48px rgba(43,33,24,.14);
+  --sand:       #F5EFE6;
+  --sand-dk:    #EAE0D0;
+  --ink:        #1C1713;
+  --ink-mid:    #4A3F35;
+  --ink-light:  #7A6E65;
+  --rust:       #B84A2A;
+  --rust-lt:    #F5DDD6;
+  --rust-dk:    #8A3018;
+  --sage:       #3D7A5C;
+  --sage-lt:    #CBE8D8;
+  --sage-dk:    #2A5C41;
+  --gold:       #C08020;
+  --gold-lt:    #F5EAC8;
+  --sky:        #2A6080;
+  --sky-lt:     #D0E8F5;
+  --border:     #D8D0C5;
+  --white:      #FFFFFF;
+  --shadow-sm:  0 1px 6px rgba(28,23,19,.07);
+  --shadow-md:  0 4px 20px rgba(28,23,19,.10);
+  --shadow-lg:  0 12px 48px rgba(28,23,19,.15);
+  --radius:     16px;
+  --radius-sm:  10px;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--cream);
-  color: var(--bark);
+  font-family: 'Nunito', sans-serif;
+  background: var(--sand);
+  color: var(--ink);
   min-height: 100vh;
-  overflow-x: hidden;
 }
 
-/* ── NAVBAR ─────────────────────────────────────────────── */
+/* ─── PAGE TRANSITIONS ─────────────────────────────── */
+.page { display: none; }
+.page.active { display: block; animation: slideUp .3s ease; }
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── REDESIGN RIBBON ─────────────────────────────── */
+.redesign-ribbon {
+  background: var(--sage);
+  color: #fff;
+  text-align: center;
+  padding: .55rem 2rem;
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+}
+.redesign-ribbon span {
+  background: rgba(255,255,255,.18);
+  border-radius: 20px;
+  padding: .15rem .65rem;
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+/* ─── NAVBAR ───────────────────────────────────────── */
 .nav {
-  position: sticky; top: 0; z-index: 100;
+  position: sticky; top: 0; z-index: 200;
   background: var(--white);
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 2.5rem;
-  height: 64px;
-  box-shadow: 0 1px 12px rgba(43,33,24,.06);
+  padding: 0 2.5rem; height: 68px;
+  box-shadow: var(--shadow-sm);
 }
 .nav-logo {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.7rem;
-  color: var(--terracotta);
-  letter-spacing: -.02em;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem; font-weight: 700;
+  color: var(--rust); letter-spacing: -.02em;
 }
-.nav-logo span { color: var(--bark); }
+.nav-logo span { color: var(--ink); }
 .nav-links { display: flex; gap: 2rem; }
 .nav-links a {
-  font-size: .875rem; font-weight: 500; color: var(--bark-mid);
-  text-decoration: none; transition: color .2s;
+  font-size: .875rem; font-weight: 600;
+  color: var(--ink-mid); text-decoration: none;
+  transition: color .2s; padding: .25rem 0;
+  border-bottom: 2px solid transparent;
 }
-.nav-links a:hover { color: var(--terracotta); }
-.nav-right { display: flex; align-items: center; gap: 1rem; }
-.nav-icon {
-  width: 38px; height: 38px; border-radius: 50%;
-  background: var(--cream); border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; transition: background .2s;
-  font-size: 1.1rem; color: var(--bark-mid);
+.nav-links a:hover,
+.nav-links a.active { color: var(--rust); border-bottom-color: var(--rust); }
+.nav-right { display: flex; align-items: center; gap: .75rem; }
+.nav-btn {
+  display: flex; align-items: center; gap: .4rem;
+  padding: .5rem 1rem; border-radius: 8px;
+  font-size: .82rem; font-weight: 600;
+  cursor: pointer; border: none;
+  font-family: 'Nunito', sans-serif;
+  transition: all .2s;
 }
-.nav-icon:hover { background: var(--terra-lt); color: var(--terracotta); }
-.cart-badge {
+.nav-btn-ghost { background: transparent; color: var(--ink-mid); }
+.nav-btn-ghost:hover { background: var(--sand); }
+.nav-btn-cart {
+  background: var(--rust); color: #fff;
   position: relative;
 }
-.cart-badge::after {
-  content: '1';
-  position: absolute; top: 4px; right: 4px;
-  width: 14px; height: 14px;
-  background: var(--terracotta); border-radius: 50%;
-  font-size: 9px; font-weight: 700; color: #fff;
+.nav-btn-cart:hover { background: var(--rust-dk); }
+.cart-count {
+  background: #fff; color: var(--rust);
+  border-radius: 50%; width: 18px; height: 18px;
+  font-size: .7rem; font-weight: 700;
   display: flex; align-items: center; justify-content: center;
-  line-height: 14px; text-align: center;
 }
 
-/* ── PAGES ──────────────────────────────────────────────── */
-.page { display: none; animation: fadeIn .35s ease; }
-.page.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
-/* ── BREADCRUMB ──────────────────────────────────────────── */
+/* ─── BREADCRUMB ──────────────────────────────────── */
 .breadcrumb {
-  padding: .75rem 2.5rem;
-  font-size: .8rem; color: var(--mist);
+  padding: .8rem 2.5rem;
   background: var(--white);
   border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; gap: .4rem;
+  font-size: .8rem; color: var(--ink-light);
+  display: flex; align-items: center; gap: .5rem;
 }
-.breadcrumb a { color: var(--mist); text-decoration: none; transition: color .2s; }
-.breadcrumb a:hover { color: var(--terracotta); }
-.breadcrumb span { color: var(--terracotta); font-weight: 500; }
+.breadcrumb a {
+  color: var(--ink-light); text-decoration: none;
+  transition: color .2s;
+}
+.breadcrumb a:hover { color: var(--rust); }
+.breadcrumb .current { color: var(--rust); font-weight: 600; }
+.bc-sep { color: var(--border); }
 
-/* ── HERO ─────────────────────────────────────────────── */
-.hero {
-  background: var(--bark);
-  color: var(--cream);
-  padding: 4rem 2.5rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
+/* ─── FIX BADGE ────────────────────────────────────── */
+.fix-badge {
+  display: inline-flex; align-items: center; gap: .4rem;
+  background: var(--sage-lt); border: 1.5px solid var(--sage);
+  border-radius: 20px; padding: .3rem .85rem;
+  font-size: .75rem; font-weight: 700; color: var(--sage-dk);
+  letter-spacing: .03em;
 }
-.hero::before {
+
+/* ─── HERO ─────────────────────────────────────────── */
+.hero {
+  background: var(--ink);
+  color: var(--sand);
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  min-height: 440px;
+  overflow: hidden;
+  position: relative;
+}
+.hero::after {
   content: '';
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(192,73,43,.25), transparent);
+  background: radial-gradient(ellipse 55% 70% at 100% 50%, rgba(184,74,42,.3), transparent);
   pointer-events: none;
 }
-.hero-tag {
-  display: inline-flex; align-items: center; gap: .4rem;
-  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
-  border-radius: 20px; padding: .3rem .8rem;
-  font-size: .75rem; font-weight: 500; color: rgba(255,255,255,.7);
-  margin-bottom: 1.25rem; width: fit-content;
+.hero-left {
+  padding: 4rem 2.5rem 4rem 2.5rem;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; z-index: 1;
 }
-.hero h1 {
-  font-family: 'DM Serif Display', serif;
-  font-size: 3.2rem; line-height: 1.1;
+.hero-eyebrow {
+  font-size: .72rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: #C8917A;
   margin-bottom: 1rem;
 }
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.4rem; line-height: 1.1; font-weight: 700;
+  margin-bottom: 1.1rem;
+}
 .hero h1 em { font-style: italic; color: #E8917A; }
-.hero p { font-size: 1rem; color: rgba(255,255,255,.65); line-height: 1.7; max-width: 400px; margin-bottom: 1.5rem; }
-.hero-btns { display: flex; gap: .75rem; flex-wrap: wrap; }
-.btn-primary {
-  padding: .75rem 1.75rem; background: var(--terracotta); color: #fff;
-  border: none; border-radius: 8px; font-size: .9rem; font-weight: 600;
-  cursor: pointer; transition: background .2s, transform .15s;
-  font-family: 'DM Sans', sans-serif;
+.hero-desc {
+  font-size: 1rem; line-height: 1.75;
+  color: rgba(245,239,230,.65); max-width: 420px;
+  margin-bottom: 1.75rem;
 }
-.btn-primary:hover { background: var(--terra-dk); transform: translateY(-1px); }
-.btn-ghost {
-  padding: .75rem 1.75rem; background: transparent; color: rgba(255,255,255,.8);
-  border: 1px solid rgba(255,255,255,.25); border-radius: 8px;
-  font-size: .9rem; font-weight: 500; cursor: pointer;
-  transition: background .2s; font-family: 'DM Sans', sans-serif;
+.hero-actions { display: flex; gap: .75rem; }
+.btn-rust {
+  padding: .8rem 2rem; background: var(--rust); color: #fff;
+  border: none; border-radius: var(--radius-sm); font-size: .9rem; font-weight: 700;
+  cursor: pointer; font-family: 'Nunito', sans-serif;
+  transition: all .2s;
 }
-.btn-ghost:hover { background: rgba(255,255,255,.08); }
-.hero-visual {
-  display: flex; flex-direction: column; align-items: center; gap: 1rem;
+.btn-rust:hover { background: var(--rust-dk); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(184,74,42,.35); }
+.btn-outline-light {
+  padding: .8rem 1.75rem; background: transparent; color: rgba(245,239,230,.75);
+  border: 1.5px solid rgba(245,239,230,.25); border-radius: var(--radius-sm);
+  font-size: .9rem; font-weight: 600; cursor: pointer;
+  font-family: 'Nunito', sans-serif; transition: all .2s;
 }
-.hero-card {
-  background: rgba(255,255,255,.07);
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 16px; padding: 1.25rem 1.5rem;
-  width: 100%; max-width: 320px;
+.btn-outline-light:hover { background: rgba(245,239,230,.08); border-color: rgba(245,239,230,.5); }
+.hero-right {
+  background: rgba(255,255,255,.04);
+  border-left: 1px solid rgba(255,255,255,.07);
+  padding: 3rem 2.5rem;
+  display: flex; flex-direction: column; justify-content: center; gap: 1.25rem;
+  position: relative; z-index: 1;
 }
-.hero-card-label { font-size: .7rem; color: rgba(255,255,255,.45); text-transform: uppercase; letter-spacing: .06em; margin-bottom: .5rem; }
-.comfort-meter { display: flex; align-items: center; gap: .5rem; margin-bottom: .5rem; }
-.comfort-dots { display: flex; gap: 4px; }
-.comfort-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,.15); }
-.comfort-dot.filled { background: #E8917A; }
-.comfort-label { font-size: .8rem; color: rgba(255,255,255,.7); }
-.hero-features { display: flex; gap: 1.25rem; justify-content: center; }
+.hero-stat {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+}
+.hero-stat-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .1em; color: rgba(245,239,230,.45); margin-bottom: .4rem; }
+.hero-stat-val { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--sand); }
+.hero-stat-sub { font-size: .78rem; color: rgba(245,239,230,.5); margin-top: .2rem; line-height: 1.5; }
+.hero-features {
+  display: flex; gap: 1rem;
+}
 .hero-feat {
-  display: flex; flex-direction: column; align-items: center; gap: .3rem;
-  font-size: .75rem; color: rgba(255,255,255,.5); text-align: center;
+  flex: 1; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px; padding: .75rem .65rem; text-align: center;
 }
-.hero-feat-icon { font-size: 1.4rem; }
+.hero-feat-icon { font-size: 1.3rem; margin-bottom: .3rem; }
+.hero-feat-label { font-size: .7rem; color: rgba(245,239,230,.5); line-height: 1.4; }
 
-/* ── FILTERS ─────────────────────────────────────────────── */
-.filters-section {
+/* ─── FILTER BAR ────────────────────────────────────── */
+.filter-bar {
   background: var(--white);
-  padding: 1.25rem 2.5rem;
   border-bottom: 1px solid var(--border);
-  display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
+  padding: 1rem 2.5rem;
+  display: flex; gap: .75rem; align-items: center; flex-wrap: wrap;
 }
-.filter-label { font-size: .8rem; font-weight: 600; color: var(--mist); margin-right: .25rem; }
+.filter-label { font-size: .78rem; font-weight: 700; color: var(--ink-light); white-space: nowrap; }
 .chip {
-  padding: .45rem 1rem; border-radius: 20px;
-  border: 1px solid var(--border); background: var(--white);
-  font-size: .82rem; font-weight: 500; color: var(--bark-mid);
-  cursor: pointer; transition: all .2s; font-family: 'DM Sans', sans-serif;
+  padding: .5rem 1.1rem; border-radius: 24px;
+  border: 1.5px solid var(--border); background: var(--white);
+  font-size: .82rem; font-weight: 600; color: var(--ink-mid);
+  cursor: pointer; font-family: 'Nunito', sans-serif;
+  transition: all .2s; white-space: nowrap;
 }
-.chip:hover { border-color: var(--terracotta); color: var(--terracotta); }
-.chip.active { background: var(--terracotta); border-color: var(--terracotta); color: #fff; }
-.chip-comfort { background: var(--amber-lt); border-color: #E8C060; color: var(--amber); }
-.chip-comfort.active { background: var(--amber); border-color: var(--amber); color: #fff; }
+.chip:hover { border-color: var(--rust); color: var(--rust); }
+.chip.on { background: var(--rust); border-color: var(--rust); color: #fff; }
+.chip.comfort-chip { border-color: #D4A030; color: var(--gold); background: var(--gold-lt); }
+.chip.comfort-chip.on { background: var(--gold); border-color: var(--gold); color: #fff; }
 
-/* ── PRODUCT GRID ────────────────────────────────────────── */
-.section { padding: 2.5rem 2.5rem; }
-.section-heading {
-  font-family: 'DM Serif Display', serif;
-  font-size: 1.6rem; color: var(--bark); margin-bottom: .35rem;
+/* ─── SECTION ──────────────────────────────────────── */
+.section { padding: 2.5rem; }
+.section-header { margin-bottom: 1.75rem; }
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem; font-weight: 700; color: var(--ink);
 }
-.section-sub { font-size: .875rem; color: var(--mist); margin-bottom: 1.75rem; }
+.section-sub { font-size: .875rem; color: var(--ink-light); margin-top: .3rem; line-height: 1.5; }
+
+/* ─── PRODUCT GRID ──────────────────────────────────── */
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1.5rem;
 }
 .product-card {
-  background: var(--white); border-radius: 16px;
-  border: 1px solid var(--border);
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
   overflow: hidden; cursor: pointer;
   transition: transform .25s, box-shadow .25s;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-sm);
 }
-.product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-.product-img {
-  height: 220px; position: relative;
+.product-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+.prod-img {
+  height: 240px; position: relative;
   display: flex; align-items: center; justify-content: center;
-  font-size: 4rem;
+  font-size: 5rem;
 }
-.product-img.warm { background: linear-gradient(135deg, #EDE0D5 0%, #D5C8B8 100%); }
-.product-img.cool { background: linear-gradient(135deg, #D5E0ED 0%, #B8C8D5 100%); }
-.product-img.green { background: linear-gradient(135deg, #D5EDE0 0%, #B8D5C8 100%); }
-.product-img.gold  { background: linear-gradient(135deg, #EDE8D5 0%, #D5C8A0 100%); }
-.wish-btn {
-  position: absolute; top: 10px; right: 10px;
-  width: 32px; height: 32px; border-radius: 50%;
-  background: rgba(255,255,255,.9); backdrop-filter: blur(4px);
+.prod-img.w  { background: linear-gradient(145deg,#EDE0D5,#D8C8B5); }
+.prod-img.c  { background: linear-gradient(145deg,#D0DFF0,#B5C8E0); }
+.prod-img.g  { background: linear-gradient(145deg,#CEEADB,#B0D5C0); }
+.prod-img.gd { background: linear-gradient(145deg,#F0E8CC,#D8C890); }
+.save-btn {
+  position: absolute; top: 12px; right: 12px;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,.9); border: none;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1rem; color: var(--mist); cursor: pointer;
-  transition: all .2s; border: none;
+  font-size: 1rem; cursor: pointer;
+  transition: all .2s; box-shadow: var(--shadow-sm);
 }
-.wish-btn:hover { color: var(--terracotta); background: var(--white); }
-.comfort-tag {
-  position: absolute; bottom: 10px; left: 10px;
-  background: rgba(255,255,255,.92); backdrop-filter: blur(6px);
-  border-radius: 20px; padding: .25rem .65rem;
-  display: flex; align-items: center; gap: .3rem;
-  font-size: .75rem; color: var(--bark-mid); font-weight: 500;
+.save-btn:hover { transform: scale(1.1); }
+.comfort-pill {
+  position: absolute; bottom: 12px; left: 12px;
+  background: rgba(255,255,255,.93); border-radius: 20px;
+  padding: .3rem .75rem; display: flex; align-items: center; gap: .35rem;
+  font-size: .75rem; font-weight: 600; color: var(--ink-mid);
   border: 1px solid rgba(255,255,255,.6);
 }
-.comfort-tag .star { color: var(--amber); }
-.product-body { padding: 1rem 1.1rem 1.1rem; }
-.product-name { font-size: .95rem; font-weight: 600; color: var(--bark); margin-bottom: .2rem; }
-.product-meta { font-size: .8rem; color: var(--mist); margin-bottom: .7rem; line-height: 1.4; }
-.product-footer { display: flex; justify-content: space-between; align-items: center; }
-.product-price { font-size: 1.05rem; font-weight: 700; color: var(--terracotta); }
-.product-review { font-size: .75rem; color: var(--mist); }
+.star-gold { color: var(--gold); }
+.prod-body { padding: 1.1rem 1.25rem 1.25rem; }
+.prod-name { font-size: .95rem; font-weight: 700; color: var(--ink); margin-bottom: .25rem; }
+.prod-desc { font-size: .8rem; color: var(--ink-light); line-height: 1.5; margin-bottom: .75rem; }
+.prod-footer { display: flex; justify-content: space-between; align-items: center; }
+.prod-price { font-size: 1.05rem; font-weight: 700; color: var(--rust); }
+.prod-reviews { font-size: .75rem; color: var(--ink-light); }
 
-/* ── DETAIL PAGE ─────────────────────────────────────────── */
-.detail-layout {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 3rem;
-  padding: 2.5rem 2.5rem;
-  max-width: 1100px;
-  margin: 0 auto;
+/* ─── DETAIL PAGE ───────────────────────────────────── */
+.detail-wrap {
+  max-width: 1120px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.1fr 1fr;
+  gap: 3.5rem; padding: 2.5rem;
+  align-items: start;
 }
-.detail-img-wrap {
+.detail-img-col { position: sticky; top: 88px; }
+.detail-img-box {
   border-radius: 20px; overflow: hidden;
-  height: 500px;
+  height: 520px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 8rem;
-  position: sticky; top: 80px;
+  font-size: 9rem;
+  background: linear-gradient(145deg, #EDE0D5, #D8C8B5);
+  box-shadow: var(--shadow-md);
 }
-.detail-img-wrap.warm { background: linear-gradient(145deg, #EDE0D5 0%, #D5C8B8 100%); }
-.detail-info { padding-top: .5rem; }
-.detail-brand { font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; color: var(--mist); margin-bottom: .5rem; font-weight: 600; }
+.detail-thumbs {
+  display: flex; gap: .6rem; margin-top: .85rem;
+}
+.detail-thumb {
+  flex: 1; height: 80px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; cursor: pointer;
+  border: 2px solid transparent; transition: border-color .2s;
+}
+.detail-thumb.active { border-color: var(--rust); }
+.detail-thumb.w  { background: linear-gradient(145deg,#EDE0D5,#D8C8B5); }
+.detail-thumb.c  { background: linear-gradient(145deg,#D0DFF0,#B5C8E0); }
+.detail-thumb.gd { background: linear-gradient(145deg,#F0E8CC,#D8C890); }
+
+/* info col */
+.detail-info { padding-top: .25rem; }
+.detail-brand { font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-light); margin-bottom: .5rem; }
 .detail-name {
-  font-family: 'DM Serif Display', serif;
-  font-size: 2.2rem; line-height: 1.15; color: var(--bark); margin-bottom: .5rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem; line-height: 1.1; color: var(--ink); margin-bottom: .6rem;
 }
-.detail-rating { display: flex; align-items: center; gap: .5rem; margin-bottom: 1.25rem; }
-.detail-stars { color: var(--amber); font-size: 1.1rem; letter-spacing: 1px; }
-.detail-rating-text { font-size: .85rem; color: var(--mist); }
-.detail-price { font-size: 2rem; font-weight: 700; color: var(--terracotta); margin-bottom: 1.5rem; }
+.detail-rating-row { display: flex; align-items: center; gap: .75rem; margin-bottom: 1rem; }
+.detail-stars { color: var(--gold); font-size: 1.15rem; letter-spacing: 2px; }
+.detail-reviews { font-size: .85rem; color: var(--ink-light); }
+.detail-price { font-size: 2.1rem; font-weight: 700; color: var(--rust); margin-bottom: 1.5rem; }
+
+/* comfort block */
 .comfort-block {
-  background: var(--amber-lt); border: 1px solid #E8C060;
-  border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.75rem;
+  background: var(--gold-lt); border: 1.5px solid #D4A030;
+  border-radius: var(--radius-sm); padding: 1.1rem 1.25rem; margin-bottom: 1.75rem;
 }
-.comfort-block-title { font-size: .75rem; font-weight: 600; color: var(--amber); text-transform: uppercase; letter-spacing: .07em; margin-bottom: .5rem; }
-.comfort-bars { display: flex; flex-direction: column; gap: .45rem; }
-.comfort-bar-row { display: flex; align-items: center; gap: .75rem; font-size: .8rem; color: var(--bark-mid); }
-.comfort-bar-label { width: 72px; }
-.comfort-bar-track { flex: 1; height: 6px; background: rgba(212,134,10,.2); border-radius: 3px; }
-.comfort-bar-fill { height: 100%; border-radius: 3px; background: var(--amber); }
+.comfort-block-hd {
+  font-size: .72rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .08em; color: var(--gold); margin-bottom: .75rem;
+  display: flex; align-items: center; gap: .4rem;
+}
+.comfort-bar-row {
+  display: flex; align-items: center; gap: .75rem;
+  font-size: .82rem; color: var(--ink-mid); margin-bottom: .45rem;
+}
+.cbar-label { width: 70px; font-weight: 600; }
+.cbar-track { flex: 1; height: 7px; background: rgba(192,128,32,.18); border-radius: 4px; overflow: hidden; }
+.cbar-fill { height: 100%; border-radius: 4px; background: var(--gold); transition: width .6s ease; }
+.cbar-val { font-size: .78rem; color: var(--gold); font-weight: 700; width: 32px; text-align: right; }
+
 .divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
 
-/* ── UX PROBLEM ZONE ───────────────────────────────────── */
-.ux-problem-banner {
-  background: #FFF3CD;
-  border: 2px dashed #FFC107;
-  border-radius: 12px;
-  padding: 1rem 1.25rem;
-  margin-bottom: 1.25rem;
-  display: flex; gap: .75rem; align-items: flex-start;
+/* ─── SIZE REDESIGN (FIXED) ─────────────────────────── */
+.size-section {
+  margin-bottom: 1.5rem;
 }
-.ux-problem-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: .1rem; }
-.ux-problem-title { font-size: .8rem; font-weight: 700; color: #7D5A00; text-transform: uppercase; letter-spacing: .05em; margin-bottom: .25rem; }
-.ux-problem-desc { font-size: .82rem; color: #5A4000; line-height: 1.6; }
-.size-section-bad {
-  position: relative;
-  padding: 1rem;
-  background: var(--cream);
-  border-radius: 10px;
-  border: 2px dashed #FFC107;
-  margin-bottom: 1.25rem;
+.size-section-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: .85rem;
 }
-.size-section-bad::before {
-  content: '⚠ UX PROBLEM ZONE';
-  position: absolute; top: -11px; left: 12px;
-  background: #FFC107;
-  font-size: .65rem; font-weight: 800; color: #7D5A00;
-  padding: .1rem .5rem; border-radius: 4px; letter-spacing: .05em;
+.size-section-title {
+  font-size: .9rem; font-weight: 700; color: var(--ink);
 }
-.size-row-bad { display: flex; gap: .5rem; flex-wrap: wrap; }
-.size-btn-bad {
-  width: 38px; height: 38px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
+.size-guide-link {
+  font-size: .8rem; font-weight: 600; color: var(--rust);
+  text-decoration: none; cursor: pointer;
+  border-bottom: 1px dashed var(--rust);
+  transition: color .2s;
+}
+.size-guide-link:hover { color: var(--rust-dk); }
+.size-row {
+  display: flex; gap: .7rem; flex-wrap: wrap;
+  margin-bottom: .75rem;
+}
+.size-btn {
+  min-width: 80px; padding: .8rem .5rem;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border);
   background: var(--white);
-  font-size: .75rem; font-weight: 600; color: var(--mist);
-  cursor: pointer; transition: all .2s;
-  font-family: 'DM Sans', sans-serif;
-  display: flex; align-items: center; justify-content: center;
+  display: flex; flex-direction: column;
+  align-items: center; gap: .25rem;
+  cursor: pointer; transition: all .22s;
+  font-family: 'Nunito', sans-serif;
 }
-.size-btn-bad:hover { border-color: var(--terracotta); color: var(--terracotta); }
-.size-btn-bad.selected { border-color: var(--terracotta); background: var(--terra-lt); color: var(--terra-dk); font-weight: 700; }
-.size-stock-bad { font-size: .72rem; color: var(--mist); margin-top: .4rem; }
-.add-btn {
-  width: 100%; padding: 1rem;
-  background: var(--terracotta); color: #fff;
-  border: none; border-radius: 12px;
-  font-size: .95rem; font-weight: 700;
-  cursor: pointer; transition: all .2s;
-  font-family: 'DM Sans', sans-serif;
-  display: flex; align-items: center; justify-content: center; gap: .5rem;
+.size-btn:hover:not(.oos) {
+  border-color: var(--rust); background: var(--rust-lt);
 }
-.add-btn:hover { background: var(--terra-dk); transform: translateY(-1px); }
-.haptic-pill {
-  display: inline-flex; align-items: center; gap: .4rem;
-  background: var(--sage-lt); border: 1px solid #8FC4A8;
-  border-radius: 20px; padding: .35rem .85rem;
-  font-size: .78rem; font-weight: 500; color: var(--sage);
-  margin-top: .75rem;
+.size-btn.selected {
+  border-color: var(--rust); background: var(--rust-lt);
+  box-shadow: 0 0 0 3px rgba(184,74,42,.15);
 }
-.desc-block { margin-bottom: 1.5rem; }
-.desc-block h4 { font-size: .8rem; font-weight: 700; color: var(--mist); text-transform: uppercase; letter-spacing: .07em; margin-bottom: .5rem; }
-.desc-block p { font-size: .875rem; color: var(--bark-mid); line-height: 1.7; }
-.fabric-tags { display: flex; gap: .4rem; flex-wrap: wrap; }
-.fabric-tag { font-size: .78rem; background: var(--cream); border: 1px solid var(--border); border-radius: 20px; padding: .25rem .65rem; color: var(--bark-mid); }
+.size-btn.oos {
+  background: var(--sand); border-color: var(--border);
+  cursor: not-allowed; opacity: .55;
+  position: relative; overflow: hidden;
+}
+.size-btn.oos::after {
+  content: '';
+  position: absolute; top: 50%; left: 0; right: 0;
+  height: 1.5px; background: var(--border);
+  transform: rotate(-20deg);
+}
+.size-full {
+  font-size: .82rem; font-weight: 700; color: var(--ink);
+}
+.size-btn.selected .size-full { color: var(--rust-dk); }
+.size-btn.oos .size-full { color: var(--ink-light); }
+.size-abbr {
+  font-size: .68rem; color: var(--ink-light);
+}
+.size-oos-tag {
+  font-size: .6rem; font-weight: 700; color: var(--ink-light);
+  text-transform: uppercase; letter-spacing: .05em;
+}
+.size-btn.selected .size-abbr { color: rgba(184,74,42,.7); }
 
-/* ── CART PAGE ───────────────────────────────────────────── */
-.cart-layout {
-  display: grid;
-  grid-template-columns: 1fr 360px;
-  gap: 2rem;
-  padding: 2.5rem 2.5rem;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-.cart-title { font-family: 'DM Serif Display', serif; font-size: 1.8rem; margin-bottom: 1.5rem; }
-.cart-item {
-  background: var(--white); border-radius: 16px; border: 1px solid var(--border);
-  padding: 1.25rem 1.5rem;
-  display: flex; gap: 1.25rem; align-items: center;
-  margin-bottom: 1rem; box-shadow: var(--shadow);
-}
-.cart-thumb {
-  width: 80px; height: 80px; border-radius: 10px;
-  background: linear-gradient(135deg, #EDE0D5, #D5C8B8);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 2rem; flex-shrink: 0;
-}
-.cart-item-name { font-size: .95rem; font-weight: 600; color: var(--bark); }
-.cart-item-meta { font-size: .82rem; color: var(--mist); margin-top: .2rem; }
-.cart-item-price { font-size: 1rem; font-weight: 700; color: var(--terracotta); margin-top: .5rem; }
-.cart-summary {
-  background: var(--white); border-radius: 16px; border: 1px solid var(--border);
-  padding: 1.5rem; box-shadow: var(--shadow); height: fit-content;
-  position: sticky; top: 80px;
-}
-.cart-summary h3 { font-size: 1rem; font-weight: 700; margin-bottom: 1.25rem; }
-.summary-row { display: flex; justify-content: space-between; font-size: .875rem; color: var(--bark-mid); margin-bottom: .6rem; }
-.summary-total { display: flex; justify-content: space-between; font-size: 1rem; font-weight: 700; padding-top: 1rem; border-top: 1px solid var(--border); margin-top: .5rem; }
-.haptic-box {
-  background: var(--sage-lt); border: 1px solid #8FC4A8; border-radius: 12px;
-  padding: 1rem 1.1rem; margin: 1.25rem 0; display: flex; gap: .75rem;
-}
-.haptic-box-text { font-size: .82rem; color: var(--sage); line-height: 1.6; }
-.haptic-box-text strong { color: var(--sage); }
-.checkout-btn {
-  width: 100%; padding: .95rem;
-  background: var(--terracotta); color: #fff;
-  border: none; border-radius: 12px;
-  font-size: .9rem; font-weight: 700;
-  cursor: pointer; transition: all .2s;
-  font-family: 'DM Sans', sans-serif;
-  margin-top: .5rem;
-}
-.checkout-btn:hover { background: var(--terra-dk); }
-
-/* ── ORDER CONFIRMED ─────────────────────────────────────── */
-.confirm-page {
-  display: flex; flex-direction: column; align-items: center;
-  padding: 5rem 2.5rem; text-align: center;
-}
-.confirm-icon {
-  width: 80px; height: 80px; border-radius: 50%;
-  background: var(--sage-lt); display: flex; align-items: center; justify-content: center;
-  font-size: 2.5rem; margin-bottom: 1.5rem;
-  animation: popIn .5s cubic-bezier(.34,1.56,.64,1);
-}
-@keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-.confirm-title { font-family: 'DM Serif Display', serif; font-size: 2.4rem; margin-bottom: .75rem; }
-.confirm-sub { font-size: 1rem; color: var(--mist); max-width: 420px; line-height: 1.7; margin-bottom: 2rem; }
-.order-card {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: 16px; padding: 1.5rem 2rem;
-  text-align: left; min-width: 360px; max-width: 480px;
-  margin-bottom: 2rem; box-shadow: var(--shadow);
-}
-.order-row { display: flex; justify-content: space-between; padding: .6rem 0; border-bottom: 1px solid var(--border); font-size: .875rem; }
-.order-row:last-child { border-bottom: none; }
-.order-row-label { color: var(--mist); }
-.order-row-val { font-weight: 600; color: var(--bark); }
-.haptic-confirm {
-  background: var(--sage-lt); border-radius: 12px; padding: 1rem 1.25rem;
-  display: flex; align-items: center; gap: .75rem;
-  max-width: 480px; margin-bottom: 1.5rem;
-}
-.haptic-confirm-text { font-size: .85rem; color: var(--sage); line-height: 1.6; }
-.pulse { animation: pulse 1.8s infinite; }
-@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:.4; } }
-
-/* ── FOOTER ─────────────────────────────────────────────── */
-.footer {
-  background: var(--bark);
-  color: rgba(255,255,255,.5);
-  text-align: center;
-  padding: 2rem 2.5rem;
-  font-size: .8rem;
-  margin-top: 3rem;
-}
-.footer strong { color: rgba(255,255,255,.8); }
-
-/* ── PAGE STEP NAV ───────────────────────────────────────── */
-.step-nav {
-  background: var(--white); border-bottom: 1px solid var(--border);
-  padding: .75rem 2.5rem;
+/* stock indicator */
+.stock-indicator {
   display: flex; align-items: center; gap: .5rem;
-  overflow-x: auto;
+  font-size: .82rem; font-weight: 600;
+  padding: .5rem .85rem; border-radius: 8px;
+  transition: all .3s;
 }
-.step-nav::-webkit-scrollbar { display: none; }
-.step { display: flex; align-items: center; gap: .4rem; font-size: .8rem; color: var(--mist); white-space: nowrap; }
-.step-num {
-  width: 22px; height: 22px; border-radius: 50%;
-  background: var(--cream); border: 1px solid var(--border);
+.stock-in { background: var(--sage-lt); color: var(--sage-dk); }
+.stock-low { background: var(--gold-lt); color: #7A4E00; }
+.stock-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.stock-in .stock-dot { background: var(--sage); }
+.stock-low .stock-dot { background: var(--gold); }
+
+/* size guide modal */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(28,23,19,.55); backdrop-filter: blur(4px);
   display: flex; align-items: center; justify-content: center;
-  font-size: .7rem; font-weight: 700;
+  padding: 1.5rem;
+  opacity: 0; pointer-events: none; transition: opacity .25s;
 }
-.step.active .step-num { background: var(--terracotta); border-color: var(--terracotta); color: #fff; }
-.step.active { color: var(--bark); font-weight: 600; }
-.step.done .step-num { background: var(--sage); border-color: var(--sage); color: #fff; }
-.step-arrow { color: var(--border); font-size: .7rem; margin: 0 .25rem; }
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal {
+  background: var(--white); border-radius: 20px;
+  padding: 2rem 2.25rem; max-width: 520px; width: 100%;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(16px); transition: transform .25s;
+}
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
+.modal-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; }
+.modal-close { width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--border); background: none; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; }
+.guide-table { width: 100%; border-collapse: collapse; font-size: .875rem; }
+.guide-table th { background: var(--sand); padding: .6rem .85rem; text-align: left; font-weight: 700; font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-light); border-bottom: 1.5px solid var(--border); }
+.guide-table td { padding: .65rem .85rem; border-bottom: 1px solid var(--sand-dk); color: var(--ink-mid); }
+.guide-table tr:last-child td { border-bottom: none; }
+.guide-table tr.highlight td { background: var(--rust-lt); font-weight: 600; }
+.guide-note { font-size: .78rem; color: var(--ink-light); margin-top: .75rem; line-height: 1.6; background: var(--sand); border-radius: 8px; padding: .65rem .85rem; }
+
+/* add to cart */
+.add-cart-btn {
+  width: 100%; padding: 1.1rem;
+  background: var(--rust); color: #fff; border: none;
+  border-radius: var(--radius-sm); font-size: 1rem; font-weight: 700;
+  cursor: pointer; font-family: 'Nunito', sans-serif;
+  display: flex; align-items: center; justify-content: center; gap: .5rem;
+  transition: all .2s; letter-spacing: .01em;
+  margin-top: 1.25rem;
+}
+.add-cart-btn:hover { background: var(--rust-dk); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(184,74,42,.3); }
+.add-cart-btn:disabled { background: var(--border); color: var(--ink-light); cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* haptic strip */
+.haptic-strip {
+  display: flex; align-items: center; gap: .75rem;
+  background: var(--sage-lt); border: 1.5px solid #8FC4A8;
+  border-radius: var(--radius-sm); padding: .9rem 1.1rem;
+  margin-top: .85rem;
+}
+.haptic-strip-text { font-size: .82rem; color: var(--sage-dk); line-height: 1.6; }
+.haptic-icon { font-size: 1.35rem; flex-shrink: 0; }
+.haptic-pulse { animation: hpulse 2s infinite; }
+@keyframes hpulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.92)} }
+
+/* desc */
+.desc-block { margin-bottom: 1.25rem; }
+.desc-block h4 { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-light); margin-bottom: .5rem; }
+.desc-block p { font-size: .88rem; color: var(--ink-mid); line-height: 1.75; }
+.tag-row { display: flex; gap: .4rem; flex-wrap: wrap; }
+.tag { font-size: .78rem; background: var(--sand); border: 1.5px solid var(--border); border-radius: 20px; padding: .25rem .7rem; color: var(--ink-mid); font-weight: 500; }
+
+/* ─── CART ──────────────────────────────────────────── */
+.cart-wrap { max-width: 1000px; margin: 0 auto; padding: 2.5rem; display: grid; grid-template-columns: 1fr 360px; gap: 2rem; align-items: start; }
+.cart-heading { font-family: 'Playfair Display', serif; font-size: 1.9rem; margin-bottom: 1.5rem; }
+.cart-item {
+  background: var(--white); border-radius: var(--radius);
+  border: 1.5px solid var(--border); padding: 1.25rem 1.5rem;
+  display: flex; gap: 1.25rem; align-items: center;
+  box-shadow: var(--shadow-sm); margin-bottom: 1rem;
+}
+.cart-thumb { width: 82px; height: 82px; border-radius: 10px; background: linear-gradient(145deg,#EDE0D5,#D8C8B5); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; }
+.cart-item-name { font-size: .95rem; font-weight: 700; color: var(--ink); }
+.cart-item-meta { font-size: .82rem; color: var(--ink-light); margin-top: .2rem; line-height: 1.5; }
+.cart-item-price { font-size: 1rem; font-weight: 700; color: var(--rust); margin-top: .5rem; }
+.cart-edit-btn { margin-left: auto; background: none; border: 1.5px solid var(--border); border-radius: 8px; padding: .4rem .75rem; font-size: .78rem; font-weight: 600; color: var(--ink-mid); cursor: pointer; font-family: 'Nunito', sans-serif; transition: all .2s; }
+.cart-edit-btn:hover { border-color: var(--rust); color: var(--rust); }
+
+.order-summary { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 1.5rem 1.6rem; box-shadow: var(--shadow-sm); position: sticky; top: 88px; }
+.order-summary h3 { font-size: 1rem; font-weight: 700; margin-bottom: 1.25rem; }
+.sum-row { display: flex; justify-content: space-between; font-size: .875rem; color: var(--ink-mid); padding: .4rem 0; }
+.sum-total { display: flex; justify-content: space-between; font-size: 1.05rem; font-weight: 700; padding-top: 1rem; border-top: 1.5px solid var(--border); margin-top: .5rem; }
+.sum-haptic { background: var(--sage-lt); border: 1.5px solid #8FC4A8; border-radius: 10px; padding: .9rem 1rem; margin: 1.1rem 0; display: flex; gap: .65rem; align-items: flex-start; }
+.sum-haptic-text { font-size: .8rem; color: var(--sage-dk); line-height: 1.6; }
+.place-btn { width: 100%; padding: 1rem; background: var(--rust); color: #fff; border: none; border-radius: var(--radius-sm); font-size: .92rem; font-weight: 700; cursor: pointer; font-family: 'Nunito', sans-serif; transition: all .2s; }
+.place-btn:hover { background: var(--rust-dk); transform: translateY(-1px); }
+.secure-note { text-align: center; font-size: .75rem; color: var(--ink-light); margin-top: .75rem; line-height: 1.5; }
+
+/* ─── CONFIRM ───────────────────────────────────────── */
+.confirm-wrap { display: flex; flex-direction: column; align-items: center; padding: 5rem 2.5rem; text-align: center; }
+.confirm-check { width: 88px; height: 88px; border-radius: 50%; background: var(--sage-lt); display: flex; align-items: center; justify-content: center; font-size: 2.8rem; margin-bottom: 1.5rem; animation: popIn .5s cubic-bezier(.34,1.56,.64,1); }
+@keyframes popIn { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+.confirm-title { font-family: 'Playfair Display', serif; font-size: 2.6rem; margin-bottom: .75rem; }
+.confirm-sub { font-size: 1rem; color: var(--ink-light); max-width: 440px; line-height: 1.75; margin-bottom: 2rem; }
+.order-card { background: var(--white); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 1.5rem 2rem; min-width: 380px; box-shadow: var(--shadow-md); text-align: left; margin-bottom: 1.5rem; }
+.order-row { display: flex; justify-content: space-between; padding: .65rem 0; border-bottom: 1px solid var(--sand-dk); font-size: .875rem; }
+.order-row:last-child { border-bottom: none; }
+.order-label { color: var(--ink-light); }
+.order-val { font-weight: 700; color: var(--ink); }
+.confirm-haptic { background: var(--sage-lt); border: 1.5px solid #8FC4A8; border-radius: var(--radius-sm); padding: 1rem 1.25rem; display: flex; gap: .75rem; align-items: center; max-width: 480px; margin-bottom: 1.75rem; }
+.confirm-haptic-text { font-size: .85rem; color: var(--sage-dk); line-height: 1.6; text-align: left; }
+
+/* ─── FOOTER ────────────────────────────────────────── */
+footer { background: var(--ink); color: rgba(245,239,230,.4); text-align: center; padding: 2rem 2.5rem; font-size: .8rem; margin-top: 2rem; }
+footer strong { color: rgba(245,239,230,.75); }
 </style>
 </head>
 <body>
 
+<!-- SIZE GUIDE MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">Size guide — Tops &amp; Jumpers</div>
+      <button class="modal-close" onclick="closeGuide()" aria-label="Close">✕</button>
+    </div>
+    <table class="guide-table">
+      <thead>
+        <tr><th>Size</th><th>Chest (inches)</th><th>Waist (inches)</th><th>Best for</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>XS</td><td>30 – 32</td><td>24 – 26</td><td>Very slim build</td></tr>
+        <tr><td>Small</td><td>34 – 36</td><td>28 – 30</td><td>Slim / regular</td></tr>
+        <tr><td>Medium</td><td>38 – 40</td><td>32 – 34</td><td>Regular build</td></tr>
+        <tr class="highlight"><td>Large</td><td>42 – 44</td><td>36 – 38</td><td>Regular / fuller</td></tr>
+        <tr><td>XL</td><td>46 – 48</td><td>40 – 42</td><td>Fuller build</td></tr>
+        <tr><td>XXL</td><td>50 – 52</td><td>44 – 46</td><td>Generous fit</td></tr>
+      </tbody>
+    </table>
+    <div class="guide-note">💡 <strong>This jumper runs true to size.</strong> If you are between sizes or prefer a relaxed feel, order one size up. Highlighted row = currently selected size.</div>
+  </div>
+</div>
+
+<!-- REDESIGN RIBBON -->
+<div class="redesign-ribbon">
+  <span>✓ After redesign</span>
+  All UX issues fixed — larger size buttons, clear labels, out-of-stock shown, size guide added, haptic confirmed
+</div>
+
 <!-- NAVBAR -->
-<nav class="nav">
+<nav class="nav" role="navigation">
   <div class="nav-logo">Fit<span>Ease</span></div>
   <div class="nav-links">
-    <a href="#" onclick="showPage('home')">Home</a>
+    <a href="#" onclick="go('home')" id="lnk-home" class="active">Home</a>
     <a href="#">New In</a>
     <a href="#">Comfort Guide</a>
     <a href="#">Help</a>
   </div>
   <div class="nav-right">
-    <div class="nav-icon">🔍</div>
-    <div class="nav-icon">❤️</div>
-    <div class="nav-icon cart-badge" onclick="showPage('cart')">🛒</div>
+    <button class="nav-btn nav-btn-ghost" aria-label="Search">🔍 Search</button>
+    <button class="nav-btn nav-btn-ghost" aria-label="Saved items">❤️ Saved</button>
+    <button class="nav-btn nav-btn-cart" onclick="go('cart')" aria-label="Cart, 1 item">
+      🛒 Cart <span class="cart-count">1</span>
+    </button>
   </div>
 </nav>
 
-<!-- ══════════════ HOME PAGE ══════════════ -->
-<div class="page active" id="page-home">
+<!-- ══════ HOME ══════ -->
+<div class="page active" id="page-home" role="main">
 
-  <!-- Hero -->
-  <div class="hero">
-    <div>
-      <div class="hero-tag">✦ Designed for comfort &amp; clarity</div>
+  <div class="hero" aria-label="Hero banner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">✦ Designed for comfort &amp; clarity</div>
       <h1>Fashion that<br><em>truly fits</em><br>your life</h1>
-      <p>Shopping for clothes should never be stressful. FitEase gives you large, clear product information, honest comfort ratings, and the confidence to order right the first time.</p>
-      <div class="hero-btns">
-        <button class="btn-primary" onclick="showPage('detail')">Shop now</button>
-        <button class="btn-ghost">How it works</button>
+      <p class="hero-desc">Shopping for clothes should never be stressful. FitEase gives you large, clear information and honest comfort ratings — so you order right the first time, every time.</p>
+      <div class="hero-actions">
+        <button class="btn-rust" onclick="go('detail')">Shop now</button>
+        <button class="btn-outline-light">How it works</button>
       </div>
     </div>
-    <div class="hero-visual">
-      <div class="hero-card">
-        <div class="hero-card-label">Fabric comfort score</div>
-        <div class="comfort-meter">
-          <div class="comfort-dots">
-            <div class="comfort-dot filled"></div>
-            <div class="comfort-dot filled"></div>
-            <div class="comfort-dot filled"></div>
-            <div class="comfort-dot filled"></div>
-            <div class="comfort-dot filled"></div>
-          </div>
-          <div class="comfort-label">Extremely soft</div>
-        </div>
-        <div style="font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.5">Rated by 214 shoppers aged 60+.<br>Feels like a soft cotton T-shirt.</div>
+    <div class="hero-right">
+      <div class="hero-stat">
+        <div class="hero-stat-label">Community comfort score</div>
+        <div class="hero-stat-val">★★★★★ 4.8 / 5</div>
+        <div class="hero-stat-sub">Rated by 214 shoppers aged 60+<br>"Feels like a favourite cotton T-shirt."</div>
       </div>
       <div class="hero-features">
-        <div class="hero-feat"><span class="hero-feat-icon">👆</span>Haptic<br>feedback</div>
-        <div class="hero-feat"><span class="hero-feat-icon">🔤</span>Large<br>text</div>
-        <div class="hero-feat"><span class="hero-feat-icon">↩️</span>Easy<br>returns</div>
-        <div class="hero-feat"><span class="hero-feat-icon">⭐</span>Comfort<br>ratings</div>
+        <div class="hero-feat"><div class="hero-feat-icon">👆</div><div class="hero-feat-label">Haptic feedback</div></div>
+        <div class="hero-feat"><div class="hero-feat-icon">🔤</div><div class="hero-feat-label">Large clear text</div></div>
+        <div class="hero-feat"><div class="hero-feat-icon">📏</div><div class="hero-feat-label">Full size guide</div></div>
+        <div class="hero-feat"><div class="hero-feat-icon">↩️</div><div class="hero-feat-label">Easy returns</div></div>
       </div>
     </div>
   </div>
 
-  <!-- Filters -->
-  <div class="filters-section">
-    <span class="filter-label">Filter:</span>
-    <div class="chip active" onclick="toggleChip(this)">All items</div>
-    <div class="chip" onclick="toggleChip(this)">Tops &amp; Jumpers</div>
-    <div class="chip" onclick="toggleChip(this)">Trousers</div>
-    <div class="chip" onclick="toggleChip(this)">Cardigans</div>
-    <div class="chip chip-comfort" onclick="toggleChip(this)">★ 4.5+ comfort only</div>
-    <div class="chip" onclick="toggleChip(this)">Soft fabrics</div>
-    <div class="chip" onclick="toggleChip(this)">Easy fastenings</div>
+  <div class="filter-bar" role="search" aria-label="Product filters">
+    <span class="filter-label">Filter by:</span>
+    <button class="chip on" onclick="toggleChip(this)">All items</button>
+    <button class="chip" onclick="toggleChip(this)">Tops &amp; Jumpers</button>
+    <button class="chip" onclick="toggleChip(this)">Trousers</button>
+    <button class="chip" onclick="toggleChip(this)">Cardigans</button>
+    <button class="chip comfort-chip" onclick="toggleChip(this)">★ 4.5+ comfort only</button>
+    <button class="chip" onclick="toggleChip(this)">Soft fabrics</button>
+    <button class="chip" onclick="toggleChip(this)">Easy fastenings</button>
   </div>
 
-  <!-- Products -->
   <div class="section">
-    <div class="section-heading">Comfort picks for you</div>
-    <div class="section-sub">Rated by shoppers aged 60 and above · Honest descriptions · No returns hassle</div>
-    <div class="product-grid">
+    <div class="section-header">
+      <div class="section-title">Comfort picks for you</div>
+      <div class="section-sub">Rated honestly by shoppers aged 60 and above · No returns hassle · Plain-English descriptions</div>
+    </div>
+    <div class="product-grid" role="list">
 
-      <div class="product-card" onclick="showPage('detail')">
-        <div class="product-img warm">
-          <button class="wish-btn">🤍</button>
-          <div class="comfort-tag"><span class="star">★</span> 4.8 comfort</div>
+      <article class="product-card" onclick="go('detail')" role="listitem" tabindex="0" aria-label="Cotton Knit Jumper, £28, 4.8 comfort rating">
+        <div class="prod-img w" aria-hidden="true">
+          <button class="save-btn" aria-label="Save to wishlist">🤍</button>
+          <div class="comfort-pill"><span class="star-gold">★</span> 4.8 comfort</div>
           🧥
         </div>
-        <div class="product-body">
-          <div class="product-name">Cotton Knit Jumper</div>
-          <div class="product-meta">Relaxed fit · Blue · Soft like a cotton T-shirt · Easy over head</div>
-          <div class="product-footer">
-            <div class="product-price">£28.00</div>
-            <div class="product-review">214 reviews</div>
+        <div class="prod-body">
+          <div class="prod-name">Cotton Knit Jumper</div>
+          <div class="prod-desc">Relaxed fit · Blue · Soft like a cotton T-shirt · Easy over head</div>
+          <div class="prod-footer">
+            <div class="prod-price">£28.00</div>
+            <div class="prod-reviews">214 reviews</div>
           </div>
         </div>
-      </div>
+      </article>
 
-      <div class="product-card">
-        <div class="product-img cool">
-          <button class="wish-btn">🤍</button>
-          <div class="comfort-tag"><span class="star">★</span> 4.5 comfort</div>
+      <article class="product-card" role="listitem" tabindex="0" aria-label="Linen Blend Trousers, £34, 4.5 comfort rating">
+        <div class="prod-img c" aria-hidden="true">
+          <button class="save-btn" aria-label="Save to wishlist">🤍</button>
+          <div class="comfort-pill"><span class="star-gold">★</span> 4.5 comfort</div>
           👔
         </div>
-        <div class="product-body">
-          <div class="product-name">Linen Blend Trousers</div>
-          <div class="product-meta">Loose fit · Beige · Breathable · Elasticated waist</div>
-          <div class="product-footer">
-            <div class="product-price">£34.00</div>
-            <div class="product-review">98 reviews</div>
+        <div class="prod-body">
+          <div class="prod-name">Linen Blend Trousers</div>
+          <div class="prod-desc">Loose fit · Beige · Breathable · Elasticated waist</div>
+          <div class="prod-footer">
+            <div class="prod-price">£34.00</div>
+            <div class="prod-reviews">98 reviews</div>
           </div>
         </div>
-      </div>
+      </article>
 
-      <div class="product-card">
-        <div class="product-img green">
-          <button class="wish-btn">🤍</button>
-          <div class="comfort-tag"><span class="star">★</span> 4.9 comfort</div>
+      <article class="product-card" role="listitem" tabindex="0" aria-label="Merino Wool Cardigan, £52, 4.9 comfort rating">
+        <div class="prod-img g" aria-hidden="true">
+          <button class="save-btn" aria-label="Save to wishlist">🤍</button>
+          <div class="comfort-pill"><span class="star-gold">★</span> 4.9 comfort</div>
           🧶
         </div>
-        <div class="product-body">
-          <div class="product-name">Merino Wool Cardigan</div>
-          <div class="product-meta">Open front · Forest green · Incredibly soft · No scratching</div>
-          <div class="product-footer">
-            <div class="product-price">£52.00</div>
-            <div class="product-review">341 reviews</div>
+        <div class="prod-body">
+          <div class="prod-name">Merino Wool Cardigan</div>
+          <div class="prod-desc">Open front · Forest green · Incredibly soft · No scratching</div>
+          <div class="prod-footer">
+            <div class="prod-price">£52.00</div>
+            <div class="prod-reviews">341 reviews</div>
           </div>
         </div>
-      </div>
+      </article>
 
-      <div class="product-card">
-        <div class="product-img gold">
-          <button class="wish-btn">🤍</button>
-          <div class="comfort-tag"><span class="star">★</span> 4.3 comfort</div>
+      <article class="product-card" role="listitem" tabindex="0" aria-label="Jersey Wrap Dress, £44, 4.3 comfort rating">
+        <div class="prod-img gd" aria-hidden="true">
+          <button class="save-btn" aria-label="Save to wishlist">🤍</button>
+          <div class="comfort-pill"><span class="star-gold">★</span> 4.3 comfort</div>
           🥻
         </div>
-        <div class="product-body">
-          <div class="product-name">Jersey Wrap Dress</div>
-          <div class="product-meta">Midi length · Dusty rose · Stretchy · Zip-free design</div>
-          <div class="product-footer">
-            <div class="product-price">£44.00</div>
-            <div class="product-review">177 reviews</div>
+        <div class="prod-body">
+          <div class="prod-name">Jersey Wrap Dress</div>
+          <div class="prod-desc">Midi length · Dusty rose · Stretchy · Zip-free design</div>
+          <div class="prod-footer">
+            <div class="prod-price">£44.00</div>
+            <div class="prod-reviews">177 reviews</div>
           </div>
         </div>
-      </div>
+      </article>
 
     </div>
   </div>
 </div>
 
-<!-- ══════════════ DETAIL PAGE ══════════════ -->
+<!-- ══════ DETAIL ══════ -->
 <div class="page" id="page-detail">
-  <div class="breadcrumb">
-    <a href="#" onclick="showPage('home')">Home</a> › <a href="#" onclick="showPage('home')">Tops &amp; Jumpers</a> › <span>Cotton Knit Jumper</span>
+  <div class="breadcrumb" aria-label="Breadcrumb navigation">
+    <a href="#" onclick="go('home')">Home</a>
+    <span class="bc-sep">›</span>
+    <a href="#" onclick="go('home')">Tops &amp; Jumpers</a>
+    <span class="bc-sep">›</span>
+    <span class="current">Cotton Knit Jumper</span>
   </div>
-  <div class="detail-layout">
 
-    <!-- Image -->
-    <div class="detail-img-wrap warm">🧥</div>
+  <div class="detail-wrap">
+    <!-- image col -->
+    <div class="detail-img-col">
+      <div class="detail-img-box" id="mainImg" aria-label="Product image: blue cotton knit jumper">🧥</div>
+      <div class="detail-thumbs" role="group" aria-label="Colour options">
+        <button class="detail-thumb w active" onclick="switchColour(this,'🧥','Blue')" aria-label="Blue, selected" aria-pressed="true">🧥</button>
+        <button class="detail-thumb c" onclick="switchColour(this,'👔','Navy')" aria-label="Navy" aria-pressed="false">👔</button>
+        <button class="detail-thumb gd" onclick="switchColour(this,'🧣','Oat')" aria-label="Oat" aria-pressed="false">🧣</button>
+      </div>
+    </div>
 
-    <!-- Info -->
+    <!-- info col -->
     <div class="detail-info">
       <div class="detail-brand">FitEase Essentials · Ref FE-2041</div>
-      <div class="detail-name">Cotton Knit Jumper</div>
-      <div class="detail-rating">
-        <span class="detail-stars">★★★★★</span>
-        <span class="detail-rating-text">4.8 · 214 reviews</span>
+      <h1 class="detail-name">Cotton Knit Jumper</h1>
+      <div class="detail-rating-row">
+        <span class="detail-stars" aria-label="4.8 stars">★★★★★</span>
+        <span class="detail-reviews">4.8 · 214 verified reviews</span>
       </div>
-      <div class="detail-price">£28.00</div>
+      <div class="detail-price" aria-label="Price: £28.00">£28.00</div>
 
-      <div class="comfort-block">
-        <div class="comfort-block-title">🌟 Comfort ratings from elderly shoppers</div>
-        <div class="comfort-bars">
-          <div class="comfort-bar-row"><span class="comfort-bar-label">Softness</span><div class="comfort-bar-track"><div class="comfort-bar-fill" style="width:95%"></div></div><span>9.5/10</span></div>
-          <div class="comfort-bar-row"><span class="comfort-bar-label">Weight</span><div class="comfort-bar-track"><div class="comfort-bar-fill" style="width:80%"></div></div><span>Light</span></div>
-          <div class="comfort-bar-row"><span class="comfort-bar-label">Warmth</span><div class="comfort-bar-track"><div class="comfort-bar-fill" style="width:70%"></div></div><span>Medium</span></div>
-        </div>
+      <div class="comfort-block" aria-label="Comfort ratings">
+        <div class="comfort-block-hd">🌟 Comfort ratings — from shoppers aged 60+</div>
+        <div class="comfort-bar-row"><span class="cbar-label">Softness</span><div class="cbar-track"><div class="cbar-fill" style="width:95%"></div></div><span class="cbar-val">9.5</span></div>
+        <div class="comfort-bar-row"><span class="cbar-label">Weight</span><div class="cbar-track"><div class="cbar-fill" style="width:30%"></div></div><span class="cbar-val">Light</span></div>
+        <div class="comfort-bar-row"><span class="cbar-label">Warmth</span><div class="cbar-track"><div class="cbar-fill" style="width:65%"></div></div><span class="cbar-val">Med</span></div>
       </div>
 
       <div class="divider"></div>
 
-      <!-- ── UX PROBLEM: SIZE SELECTION ─── -->
-      <div class="ux-problem-banner">
-        <span class="ux-problem-icon">⚠️</span>
-        <div>
-          <div class="ux-problem-title">UX Problem identified (before redesign)</div>
-          <div class="ux-problem-desc">The size selector below uses small 38×38px circles with abbreviations only — no section heading, no label, no size guide link, and XS is silently absent with no explanation. During usability testing, Grace spent <strong>47 seconds</strong> unable to identify these as interactive size buttons.</div>
+      <!-- ─── REDESIGNED SIZE SELECTOR ─── -->
+      <div class="size-section" aria-label="Size selection">
+        <div class="size-section-header">
+          <span class="size-section-title">Select your size:</span>
+          <a class="size-guide-link" onclick="openGuide()" role="button" tabindex="0" aria-haspopup="dialog">📏 Size guide</a>
+        </div>
+
+        <div class="size-row" id="sizeRow" role="radiogroup" aria-label="Available sizes">
+          <button class="size-btn oos" disabled aria-label="Extra Small, out of stock" aria-disabled="true">
+            <span class="size-full">Extra Small</span>
+            <span class="size-abbr">XS</span>
+            <span class="size-oos-tag">Out of stock</span>
+          </button>
+          <button class="size-btn" onclick="pickSize(this,'Small','S')" aria-label="Small" role="radio" aria-checked="false">
+            <span class="size-full">Small</span>
+            <span class="size-abbr">S · 34–36"</span>
+          </button>
+          <button class="size-btn" onclick="pickSize(this,'Medium','M')" aria-label="Medium" role="radio" aria-checked="false">
+            <span class="size-full">Medium</span>
+            <span class="size-abbr">M · 38–40"</span>
+          </button>
+          <button class="size-btn selected" onclick="pickSize(this,'Large','L')" aria-label="Large, selected" role="radio" aria-checked="true">
+            <span class="size-full">Large</span>
+            <span class="size-abbr">L · 42–44"</span>
+          </button>
+          <button class="size-btn" onclick="pickSize(this,'Extra Large','XL')" aria-label="Extra Large" role="radio" aria-checked="false">
+            <span class="size-full">Extra Large</span>
+            <span class="size-abbr">XL · 46–48"</span>
+          </button>
+          <button class="size-btn" onclick="pickSize(this,'XXL','XXL')" aria-label="XXL" role="radio" aria-checked="false">
+            <span class="size-full">XXL</span>
+            <span class="size-abbr">XXL · 50–52"</span>
+          </button>
+        </div>
+
+        <div class="stock-indicator stock-in" id="stockIndicator" role="status" aria-live="polite">
+          <span class="stock-dot"></span>
+          <span id="stockText">Large (L) is in stock — ready to ship</span>
         </div>
       </div>
 
-      <div class="size-section-bad">
-        <div class="size-row-bad" id="sizeRow">
-          <button class="size-btn-bad" onclick="pickSize(this,'S')">S</button>
-          <button class="size-btn-bad" onclick="pickSize(this,'M')">M</button>
-          <button class="size-btn-bad selected" onclick="pickSize(this,'L')">L</button>
-          <button class="size-btn-bad" onclick="pickSize(this,'XL')">XL</button>
-          <button class="size-btn-bad" onclick="pickSize(this,'XXL')">XXL</button>
-        </div>
-        <div class="size-stock-bad" id="stockNote">In stock</div>
-      </div>
-
-      <button class="add-btn" onclick="showPage('cart')">
-        <span>🛒</span> Add to cart
+      <button class="add-cart-btn" id="addBtn" onclick="go('cart')" aria-label="Add Large Cotton Knit Jumper to cart">
+        🛒 Add to cart
       </button>
 
-      <div class="haptic-pill">
-        <span class="pulse">🫱</span>
-        Haptic confirmation: 2 short pulses sent when size confirmed in stock
+      <div class="haptic-strip" aria-label="Haptic feedback information">
+        <span class="haptic-icon haptic-pulse" aria-hidden="true">🫱</span>
+        <div class="haptic-strip-text">
+          <strong>Haptic display active</strong> — your phone just sent 2 short pulses ·· confirming this size is in stock. No need to read the screen to be sure.
+        </div>
       </div>
 
       <div class="divider"></div>
 
       <div class="desc-block">
-        <h4>About this item</h4>
-        <p>Feels soft like a favourite cotton T-shirt. Not scratchy. Lightweight enough for indoors but warm enough for a cool day. The hem falls to the hip and won't ride up when you sit. Easy to pull over your head — no buttons or zips.</p>
+        <h2>About this item</h2>
+        <p>Feels soft like a favourite cotton T-shirt — not scratchy or stiff. Lightweight enough for indoors but warm enough for a cool day. The hem falls to the hip and will not ride up when sitting. Easy to pull over your head — no buttons or zips needed.</p>
       </div>
-
       <div class="desc-block">
-        <h4>Fabric</h4>
-        <div class="fabric-tags">
-          <span class="fabric-tag">80% Cotton</span>
-          <span class="fabric-tag">20% Polyester</span>
-          <span class="fabric-tag">Machine washable</span>
-          <span class="fabric-tag">Non-shrink</span>
+        <h2>Fabric composition</h2>
+        <div class="tag-row">
+          <span class="tag">80% Cotton</span>
+          <span class="tag">20% Polyester</span>
+          <span class="tag">Machine washable 30°</span>
+          <span class="tag">Non-shrink</span>
+          <span class="tag">Hypoallergenic</span>
         </div>
       </div>
 
+      <div class="divider"></div>
+      <div style="display:flex;gap:.75rem;align-items:center;flex-wrap:wrap">
+        <span class="fix-badge">✓ Fix 1 — Full size labels (not abbreviations)</span>
+        <span class="fix-badge">✓ Fix 2 — Section heading added</span>
+        <span class="fix-badge">✓ Fix 3 — XS shown as out of stock</span>
+        <span class="fix-badge">✓ Fix 4 — Size guide link added</span>
+        <span class="fix-badge">✓ Fix 5 — Large 80px touch targets</span>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════ CART PAGE ══════════════ -->
+<!-- ══════ CART ══════ -->
 <div class="page" id="page-cart">
-  <div class="breadcrumb">
-    <a href="#" onclick="showPage('home')">Home</a> › <span>Your cart</span>
+  <div class="breadcrumb" aria-label="Breadcrumb">
+    <a href="#" onclick="go('home')">Home</a>
+    <span class="bc-sep">›</span>
+    <span class="current">Your cart</span>
   </div>
-  <div class="cart-layout">
+  <div class="cart-wrap">
     <div>
-      <div class="cart-title">Your cart</div>
+      <h1 class="cart-heading">Your cart</h1>
       <div class="cart-item">
-        <div class="cart-thumb">🧥</div>
+        <div class="cart-thumb" aria-hidden="true">🧥</div>
         <div style="flex:1">
           <div class="cart-item-name">Cotton Knit Jumper</div>
-          <div class="cart-item-meta">Blue · Size <strong id="cartSizeDisplay">L</strong> · FitEase Essentials</div>
+          <div class="cart-item-meta">Blue · Size <strong id="cartSizeLbl">Large (L)</strong> · FitEase Essentials</div>
           <div class="cart-item-price">£28.00</div>
         </div>
-        <div style="color:var(--mist);cursor:pointer;font-size:1.2rem" onclick="showPage('detail')">✎</div>
+        <button class="cart-edit-btn" onclick="go('detail')" aria-label="Edit size selection">✎ Edit size</button>
       </div>
     </div>
 
-    <div class="cart-summary">
-      <h3>Order summary</h3>
-      <div class="summary-row"><span>Cotton Knit Jumper</span><span>£28.00</span></div>
-      <div class="summary-row"><span>Standard delivery</span><span>£3.99</span></div>
-      <div class="summary-total"><span>Total</span><span>£31.99</span></div>
-      <div class="haptic-box">
-        <span style="font-size:1.5rem;flex-shrink:0;line-height:1" class="pulse">🫱</span>
-        <div class="haptic-box-text"><strong>Tactile display active.</strong> Your phone just sent 2 short haptic pulses confirming Size L is in stock — ·· ·· — so you know without needing to read the screen.</div>
+    <div class="order-summary">
+      <h2>Order summary</h2>
+      <div class="sum-row"><span>Cotton Knit Jumper</span><span>£28.00</span></div>
+      <div class="sum-row"><span>Standard delivery (3–5 days)</span><span>£3.99</span></div>
+      <div class="sum-total"><span>Total</span><span>£31.99</span></div>
+
+      <div class="sum-haptic" aria-label="Haptic feedback confirmation">
+        <span class="haptic-icon haptic-pulse" aria-hidden="true">🫱</span>
+        <div class="sum-haptic-text"><strong>Tactile display confirmed.</strong> Two short haptic pulses were sent to confirm your size is in stock — ·· ·· — so you can feel confident without reading small text.</div>
       </div>
-      <button class="checkout-btn" onclick="showPage('confirm')">
-        Place order — £31.99
-      </button>
-      <div style="text-align:center;margin-top:.75rem;font-size:.78rem;color:var(--mist)">🔒 Secure checkout · Free returns within 30 days</div>
+
+      <button class="place-btn" onclick="go('confirm')">Place order — £31.99</button>
+      <div class="secure-note">🔒 Secure checkout · Free returns within 30 days<br>Large print receipt sent by post on request</div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════ CONFIRM PAGE ══════════════ -->
+<!-- ══════ CONFIRM ══════ -->
 <div class="page" id="page-confirm">
-  <div class="confirm-page">
-    <div class="confirm-icon">✅</div>
-    <div class="confirm-title">Order placed!</div>
-    <div class="confirm-sub">Your Cotton Knit Jumper (Size <span id="confirmSize">L</span>) is on its way. You'll receive a text message when it's dispatched.</div>
-    <div class="haptic-confirm">
-      <span style="font-size:1.5rem;flex-shrink:0">🫱</span>
-      <div class="haptic-confirm-text">
-        <strong>Haptic display confirmed</strong> — your phone delivered one long vibration pulse as your order completed. No need to look for a confirmation message.
+  <main class="confirm-wrap" aria-labelledby="confirmTitle">
+    <div class="confirm-check" aria-hidden="true">✅</div>
+    <h1 class="confirm-title" id="confirmTitle">Order placed!</h1>
+    <p class="confirm-sub">Your Cotton Knit Jumper (Size <span id="confirmSizeTxt">Large</span>) is on its way. You will receive a text message when it is dispatched.</p>
+
+    <div class="confirm-haptic" aria-label="Haptic confirmation notice">
+      <span class="haptic-icon" aria-hidden="true">🫱</span>
+      <div class="confirm-haptic-text">
+        <strong>Haptic display — order complete.</strong> Your phone delivered one long vibration pulse as your order was confirmed. No need to look for a tiny confirmation message.
       </div>
     </div>
-    <div class="order-card">
-      <div class="order-row"><span class="order-row-label">Order ref</span><span class="order-row-val">#FE-20415-LG</span></div>
-      <div class="order-row"><span class="order-row-label">Item</span><span class="order-row-val">Cotton Knit Jumper · Blue</span></div>
-      <div class="order-row"><span class="order-row-label">Size</span><span class="order-row-val" id="confirmSizeRow">L</span></div>
-      <div class="order-row"><span class="order-row-label">Delivery</span><span class="order-row-val">3–5 working days</span></div>
-      <div class="order-row"><span class="order-row-label">Total paid</span><span class="order-row-val">£31.99</span></div>
+
+    <div class="order-card" aria-label="Order details">
+      <div class="order-row"><span class="order-label">Order reference</span><span class="order-val">#FE-20415-LG</span></div>
+      <div class="order-row"><span class="order-label">Item</span><span class="order-val">Cotton Knit Jumper · Blue</span></div>
+      <div class="order-row"><span class="order-label">Size selected</span><span class="order-val" id="confirmSizeRow">Large (L)</span></div>
+      <div class="order-row"><span class="order-label">Delivery</span><span class="order-val">3–5 working days</span></div>
+      <div class="order-row"><span class="order-label">Total paid</span><span class="order-val">£31.99</span></div>
     </div>
-    <button class="btn-primary" onclick="showPage('home')">Continue shopping</button>
-  </div>
+
+    <button class="btn-rust" onclick="go('home')">Continue shopping</button>
+  </main>
 </div>
 
-<!-- FOOTER -->
-<div class="footer">
-  <strong>FitEase</strong> · Interface Design Group Project · Fashion &amp; Lifestyle · 2026
-</div>
+<footer>
+  <strong>FitEase — After Redesign</strong> · Interface Design Group Project · Fashion &amp; Lifestyle · 2026
+</footer>
 
 <script>
 var currentPage = 'home';
-var selectedSize = 'L';
+var selectedSizeFull = 'Large';
+var selectedSizeAbbr = 'L';
 
-function showPage(id) {
+function go(id) {
   document.getElementById('page-' + currentPage).classList.remove('active');
   currentPage = id;
   document.getElementById('page-' + id).classList.add('active');
-  window.scrollTo(0, 0);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // update nav link highlight
+  document.querySelectorAll('.nav-links a').forEach(function(a) { a.classList.remove('active'); });
+  if (id === 'home') document.getElementById('lnk-home').classList.add('active');
 }
 
 function toggleChip(el) {
-  document.querySelectorAll('.chip.active').forEach(function(c) { c.classList.remove('active'); });
-  el.classList.add('active');
+  el.closest('.filter-bar').querySelectorAll('.chip.on').forEach(function(c) { c.classList.remove('on'); });
+  el.classList.add('on');
 }
 
-function pickSize(el, size) {
-  selectedSize = size;
-  document.querySelectorAll('.size-btn-bad').forEach(function(b) { b.classList.remove('selected'); });
+function pickSize(el, full, abbr) {
+  selectedSizeFull = full;
+  selectedSizeAbbr = abbr;
+
+  document.querySelectorAll('.size-btn:not(.oos)').forEach(function(b) {
+    b.classList.remove('selected');
+    b.setAttribute('aria-checked', 'false');
+  });
   el.classList.add('selected');
-  document.getElementById('stockNote').textContent = 'In stock — ' + size + ' selected';
-  var d = document.getElementById('cartSizeDisplay');
-  if (d) d.textContent = size;
-  var c = document.getElementById('confirmSize');
-  if (c) c.textContent = size;
-  var r = document.getElementById('confirmSizeRow');
-  if (r) r.textContent = size;
+  el.setAttribute('aria-checked', 'true');
+
+  var ind = document.getElementById('stockIndicator');
+  var txt = document.getElementById('stockText');
+  if (full === 'Extra Large' || full === 'XXL') {
+    ind.className = 'stock-indicator stock-low';
+    txt.textContent = full + ' (' + abbr + ') — only 3 left in stock';
+  } else {
+    ind.className = 'stock-indicator stock-in';
+    txt.textContent = full + ' (' + abbr + ') is in stock — ready to ship';
+  }
+
+  // update cart & confirm labels
+  var cl = document.getElementById('cartSizeLbl');
+  if (cl) cl.textContent = full + ' (' + abbr + ')';
+  var ct = document.getElementById('confirmSizeTxt');
+  if (ct) ct.textContent = full;
+  var cr = document.getElementById('confirmSizeRow');
+  if (cr) cr.textContent = full + ' (' + abbr + ')';
 }
+
+function switchColour(el, emoji, name) {
+  document.querySelectorAll('.detail-thumb').forEach(function(t) {
+    t.classList.remove('active');
+    t.setAttribute('aria-pressed', 'false');
+  });
+  el.classList.add('active');
+  el.setAttribute('aria-pressed', 'true');
+  document.getElementById('mainImg').textContent = emoji;
+}
+
+function openGuide() {
+  document.getElementById('modalOverlay').classList.add('open');
+  document.querySelector('.modal-close').focus();
+}
+function closeGuide() {
+  document.getElementById('modalOverlay').classList.remove('open');
+}
+function closeModal(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeGuide();
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeGuide();
+});
 </script>
 </body>
 </html>
